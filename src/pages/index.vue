@@ -1,29 +1,25 @@
+<script setup>
+import { ref } from "vue";
+import { useAdvice } from "../composables/useAdvice";
+
+const { advices, search } = useAdvice();
+
+const searchItem = ref("");
+</script>
+
 <template>
   <div>
     <input
+      v-model="searchItem"
+      @change="search(searchItem)"
       type="text"
-      placeholder="Search an advise..."
+      placeholder="Search for an advice..."
       class="w-full mt-16 rounded-full text-center py-4"
     />
     <div class="grid grid-cols-2 gap-16 pt-16">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-        magni praesentium est repellendus natus ut, eligendi culpa fugiat
-        reiciendis saepe ab ipsa, ducimus nam accusamus a quibusdam quam veniam
-        sit.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-        magni praesentium est repellendus natus ut, eligendi culpa fugiat
-        reiciendis saepe ab ipsa, ducimus nam accusamus a quibusdam quam veniam
-        sit.
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-        magni praesentium est repellendus natus ut, eligendi culpa fugiat
-        reiciendis saepe ab ipsa, ducimus nam accusamus a quibusdam quam veniam
-        sit.
-      </p>
+      <div v-for="(advice, index) in advices" :key="index">
+        <p>{{ advice.advice }}</p>
+      </div>
     </div>
   </div>
 </template>
